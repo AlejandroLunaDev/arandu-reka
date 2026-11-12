@@ -24,7 +24,7 @@ Spoken language: Brazilian Portuguese, because the judges are Brazilian. About 4
 
 Primeiro, o Arandu conhece o aluno com perguntas rápidas, uma de cada vez. Depois mostra carreiras que combinam com ele, com dados reais das universidades de São Paulo: onde estudar, como entrar e a nota de corte, sempre com a fonte.
 
-Aí vem o diferencial: o aluno não só lê sobre a carreira. Ele vive um pedacinho dela. Escolhe um caminho com uma ou duas matérias reais do primeiro semestre. Todo dia, o Arandu conta algo novo sobre a profissão, propõe um exercício de verdade e responde às perguntas dele. Na Computação, ele resolve problemas. Na Medicina, analisa um caso clínico. No Direito, argumenta.
+Aí vem o diferencial: o aluno não só lê sobre a carreira. Ele vive um pedacinho dela. Escolhe um caminho com uma ou duas matérias reais do primeiro semestre. Todo dia, o Arandu conta algo novo sobre a profissão, propõe um exercício de verdade e responde às perguntas dele. Na Computação, ele resolve problemas. Na Medicina, reconhece estruturas do corpo humano em Anatomia. No Direito, argumenta.
 
 De tempos em tempos, o Arandu para a bolinha, o brinquedo dele, e conversa com o aluno sobre o que ele fez e o que curtiu. A decisão é sempre do aluno: continuar, testar outra carreira ou voltar para uma anterior."
 
