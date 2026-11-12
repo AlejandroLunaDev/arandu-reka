@@ -11,7 +11,14 @@ The student does not just read about careers. With Arandu, she lives a short ver
 The student is not alone. **The ecosystem is the student, her family and her school.** Reports let the family and the school follow her trajectory, so they can help her or act when needed. Those reports are the product's output, not an extra.
 
 **Why it should exist**
-- Today's free vocational tools in Brazil are run by institutions or course platforms that steer students into their own offer: UNIP, Estácio "Play na Carreira", Descomplica and Quero Bolsa (research 2026-11-12). No neutral product that follows the student over time was found.
+- Today's free vocational tools in Brazil are run by institutions or course platforms that steer students into their own offer: UNIP, Estácio "Play na Carreira", Descomplica and Quero Bolsa (research 2026-11-12).
+- **Paid products already sell projeto de vida to schools.** So schools do buy in this space, but the space is not empty. Examples:
+  - Arco: its SAS ensino médio materials include Projeto de Vida, plus an app for students and guardians. Arco reaches more than 4 M students in about 10k private schools.
+  - FutureMe: a gamified platform with reports to the student and the school, which claims "+3.000 escolas".
+  - Kuau and Minha Escolha.
+
+  No public prices were found. Arandu's difference to defend: the student lives real first-semester content of a career, the data is neutral and cited, and the family is the main follow-up channel.
+- **Scale:** 7,370,879 ensino médio enrolments in Brazil (INEP Censo Escolar 2025). About 1.04 M are private, a press figure quoting INEP. In SP, about 309k private students (Folha, 2025).
 - Lei 14.945/2024 requires schools to support the student's *projeto de vida* (Art. 35-B §2) and to guide the choice of formative itinerary (Art. 36 §2-D).
 - A wrong choice is costly. Dropout in Brazilian higher education is 24.8% for in-person courses and 41.6% for distance courses (Semesp).
 
