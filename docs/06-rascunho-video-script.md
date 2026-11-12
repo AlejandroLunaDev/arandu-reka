@@ -2,22 +2,22 @@
 
 Purpose: the Hack Brasil "rascunho inicial", where each team member appears on camera and explains the idea. This is not the final demo video, which must show the product working.
 
-Spoken language: Brazilian Portuguese, because the judges are Brazilian. About 400 words, which is roughly 2 min 45 s at a calm pace. Timings are approximate. Text in [brackets] is a stage direction, not spoken.
+Spoken language: Brazilian Portuguese, because the judges are Brazilian. About 430 words, which is roughly 2 min 55 s at a calm pace. Timings are approximate. Text in [brackets] is a stage direction, not spoken.
 
 ---
 
-**[0:00–0:30] Founder story (hook)**
+**[0:00–0:25] Founder story (hook)**
 [On camera, framed from the chest up. Told in the first person, calmly.]
 
 "Eu sou o Alejandro. Dos 18 aos 30 anos, eu troquei de carreira várias vezes. Estudei saúde porque era o caminho da minha família, não o meu. Só aos 37 eu descobri o que sempre esteve em mim: a tecnologia. Hoje eu faço o que amo. Mas eu queria ter descoberto isso aos 20, não aos 37."
 
-**[0:30–0:45] The scale**
+**[0:25–0:45] The scale**
 "E eu não sou exceção. No Brasil, a cada ano, um em cada quatro alunos de cursos presenciais abandona a faculdade. São mais de 7 milhões de estudantes no ensino médio diante dessa escolha. Por isso eu criei o Arandu Reka. Em guarani, 'a busca da sabedoria'."
 
-**[0:35–0:55] The problem**
+**[0:45–1:05] The problem**
 "A lei do Novo Ensino Médio garante a todo aluno oportunidades de construir o seu projeto de vida. Mas as ferramentas gratuitas de orientação vocacional costumam ser das próprias faculdades, e acabam levando o aluno para a oferta delas. E, no fim, o aluno decide sozinho: a família e a escola quase não enxergam o caminho dele."
 
-**[0:55–1:50] The solution**
+**[1:05–2:05] The solution**
 [Optional: show the logo or the cat on screen.]
 
 "O Arandu Reka é um app de orientação vocacional guiado pelo Arandu, um gato preto muito curioso.
@@ -28,10 +28,10 @@ Aí vem o diferencial: o aluno não só lê sobre a carreira. Ele vive um pedaci
 
 De tempos em tempos, o Arandu para a bolinha, o brinquedo dele, e conversa com o aluno sobre o que ele fez e o que curtiu. A decisão é sempre do aluno: continuar, testar outra carreira ou voltar para uma anterior."
 
-**[1:50–2:20] The ecosystem**
-"O aluno não está sozinho. A família recebe relatórios sobre a jornada e sabe como apoiar. Ela acompanha, mas a escolha é do aluno. A escola acompanha cada aluno e a turma toda, com alertas para agir na hora certa, e ganha uma ferramenta concreta para o projeto de vida. Ninguém além do aluno vê a conversa dele com o Arandu. Tudo é transparente."
+**[2:05–2:35] The ecosystem**
+"O aluno não está sozinho. A família recebe relatórios sobre a jornada e sabe como apoiar. Ela acompanha, mas a escolha é do aluno. A escola enxerga cada aluno e a turma toda, com alertas para agir na hora certa, e ganha uma ferramenta concreta para o projeto de vida. Ninguém além do aluno vê a conversa dele com o Arandu. Tudo é transparente."
 
-**[2:20–2:45] Why it is different and close**
+**[2:35–2:55] Why it is different and close**
 "O Arandu Reka é neutro: nenhuma recomendação depende de quem paga. Os dados são reais e citados. E o aluno sai sabendo não só qual carreira escolher, mas quem ele é.
 
 Arandu Reka: a busca da sabedoria começa por você."
