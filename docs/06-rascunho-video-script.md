@@ -15,7 +15,7 @@ Spoken language: Brazilian Portuguese, because the judges are Brazilian. About 4
 "E eu não sou exceção. No Brasil, a cada ano, um em cada quatro alunos de cursos presenciais abandona a faculdade. São mais de 7 milhões de estudantes no ensino médio diante dessa escolha. Por isso eu criei o Arandu Reka. Em guarani, 'a busca da sabedoria'."
 
 **[0:45–1:05] The problem**
-"A lei do Novo Ensino Médio garante a todo aluno oportunidades de construir o seu projeto de vida. Mas as ferramentas gratuitas de orientação vocacional costumam ser das próprias faculdades, e acabam levando o aluno para a oferta delas. E a família e a escola querem apoiar o aluno, mas não têm como acompanhar o caminho dele."
+"A lei do Novo Ensino Médio garante a todo aluno oportunidades de construir o seu projeto de vida. Mas as ferramentas gratuitas de orientação vocacional costumam ser das próprias faculdades, e acabam levando o aluno para a oferta delas."
 
 **[1:05–2:05] The solution**
 [Optional: show the logo or the cat on screen.]
@@ -29,7 +29,7 @@ Aí vem o diferencial: o aluno não só lê sobre a carreira. Ele vive um pedaci
 De tempos em tempos, o Arandu para a bolinha, o brinquedo dele, e conversa com o aluno sobre o que ele fez e o que curtiu. A decisão é sempre do aluno: continuar, testar outra carreira ou voltar para uma anterior."
 
 **[2:05–2:35] The ecosystem**
-"O aluno não está sozinho. A família recebe relatórios sobre a jornada e sabe como apoiar. Ela acompanha, mas a escolha é do aluno. A escola enxerga cada aluno e a turma toda, com alertas para agir na hora certa, e ganha uma ferramenta concreta para o projeto de vida. Ninguém além do aluno vê a conversa dele com o Arandu. Tudo é transparente."
+"O Arandu Reka soma ao que a família e a escola já fazem. A família recebe relatórios sobre a jornada e sabe como apoiar. Ela acompanha, mas a escolha é do aluno. A escola enxerga cada aluno e a turma toda, com alertas para agir na hora certa, e ganha uma ferramenta concreta para o projeto de vida. Ninguém além do aluno vê a conversa dele com o Arandu. Tudo é transparente."
 
 **[2:35–2:55] Why it is different and close**
 "O Arandu Reka é neutro: nenhuma recomendação depende de quem paga. Os dados são reais e citados. E o aluno sai sabendo não só qual carreira escolher, mas quem ele é.
