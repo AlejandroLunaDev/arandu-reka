@@ -32,7 +32,7 @@ De tempos em tempos, o Arandu para a bolinha, o brinquedo dele, e conversa com o
 "O Arandu Reka soma ao que a família e a escola já fazem. A família recebe relatórios sobre a jornada e sabe como apoiar. Ela acompanha, mas a escolha é do aluno. A escola enxerga cada aluno e a turma toda, com alertas para agir na hora certa, e ganha uma ferramenta concreta para o projeto de vida. Ninguém além do aluno vê a conversa dele com o Arandu. Tudo é transparente."
 
 **[2:35–2:55] Why it is different and close**
-"O Arandu Reka é neutro: nenhuma recomendação depende de quem paga. Os dados são reais e citados. E o aluno sai sabendo não só qual carreira escolher, mas quem ele é.
+"No Arandu Reka, cada recomendação nasce do que o aluno fez e do que ele curtiu, com dados reais e citados. E o aluno sai sabendo não só qual carreira escolher, mas quem ele é.
 
 Arandu Reka: a busca da sabedoria começa por você."
 
