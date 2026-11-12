@@ -15,7 +15,7 @@ Spoken language: Brazilian Portuguese, because the judges are Brazilian. About 4
 "E eu não sou exceção. No Brasil, a cada ano, um em cada quatro alunos de cursos presenciais abandona a faculdade. São mais de 7 milhões de estudantes no ensino médio diante dessa escolha. Por isso eu criei o Arandu Reka. Em guarani, 'a busca da sabedoria'."
 
 **[0:45–1:05] The problem**
-"A lei do Novo Ensino Médio garante a todo aluno oportunidades de construir o seu projeto de vida. Mas as ferramentas gratuitas de orientação vocacional costumam ser das próprias faculdades, e acabam levando o aluno para a oferta delas. E, no fim, o aluno escolhe sozinho, e a família e a escola só ficam sabendo quando a escolha já foi feita."
+"A lei do Novo Ensino Médio garante a todo aluno oportunidades de construir o seu projeto de vida. Mas as ferramentas gratuitas de orientação vocacional costumam ser das próprias faculdades, e acabam levando o aluno para a oferta delas. E a família e a escola querem apoiar o aluno, mas não têm como acompanhar o caminho dele."
 
 **[1:05–2:05] The solution**
 [Optional: show the logo or the cat on screen.]
