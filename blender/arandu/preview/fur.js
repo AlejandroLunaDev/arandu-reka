@@ -242,6 +242,8 @@ const VIEWS = {
   side: [[0.0, 0.3, 1.55], [0.0, 0.22, 0]],
   close: [[0.72, 0.42, 0.38], [0.2, 0.34, 0]],
   back: [[-1.1, 0.5, 0.75], [-0.1, 0.25, 0]],
+  // Wide enough for every clip, the jump included: used for the PNG renders.
+  render: [[1.0, 0.52, 1.65], [0.0, 0.33, 0]],
 };
 function view(name) {
   const [p, t] = VIEWS[name];
@@ -263,10 +265,13 @@ function pose(name, rots) {
   const r = state.rig[name];
   if (r) turn(r.bone.quaternion.copy(r.rest), r, rots);
 }
-// Keyed bones: add to what the clip set this frame.
+// Keyed bones: add to what the clip set this frame. The mixer only writes a bone whose keyed
+// value changed, so animate() puts the clip value back first or the nudges would pile up.
 function nudge(name, rots) {
   const r = state.rig[name];
-  if (r) turn(r.bone.quaternion, r, rots);
+  if (!r) return;
+  (r.clip ??= new THREE.Quaternion()).copy(r.bone.quaternion);
+  turn(r.bone.quaternion, r, rots);
 }
 
 function play(name) {
@@ -393,6 +398,7 @@ const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 function animate(t, dt) {
   const { model, rig, look } = state;
+  for (const r of Object.values(rig)) if (r.clip) r.bone.quaternion.copy(r.clip);
   state.mixer.update(dt);
 
   // Spin turns the whole model; the delayed skeleton turns that into fur motion.
@@ -489,12 +495,13 @@ function hold(name, time) {
   a.time = time;
   a.paused = true;
   state.current = a;
-  state.mixer.update(0);
 }
 
-async function render(name) {
+// Waits a number of frames, not of seconds, so the fur springs settle even when the browser
+// draws slowly.
+async function render(name, frames = 40) {
   shadow.visible = false;
-  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  for (let i = 0; i < frames; i++) await new Promise((r) => requestAnimationFrame(r));
   const blob = await new Promise((r) => renderer.domElement.toBlob(r, 'image/png'));
   shadow.visible = true;
   await fetch(`/render/${name}`, { method: 'POST', body: blob });
