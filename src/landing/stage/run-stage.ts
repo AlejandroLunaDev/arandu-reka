@@ -93,8 +93,6 @@ type Gltf = Awaited<ReturnType<GLTFLoader["loadAsync"]>>;
 
 function start(renderer: THREE.WebGLRenderer, catGltf: Gltf, propsGltf: Gltf): () => void {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Touch devices are mostly phones and tablets: their GPUs get fewer fur shells.
-  const handheld = matchMedia("(pointer: coarse)").matches;
 
   const scene = new THREE.Scene();
   // Pixel units: one unit is one CSS pixel, the origin at the middle of the viewport.
@@ -108,8 +106,6 @@ function start(renderer: THREE.WebGLRenderer, catGltf: Gltf, propsGltf: Gltf): (
   const back = new THREE.DirectionalLight(tokenColor("cream-200"), 1.6);
   back.position.set(-1.5, 0.8, -1);
   scene.add(back);
-  // The camera never turns, so view space is world space: the fur reads the key light from here.
-  const keyDir = key.position.clone().normalize();
 
   const disposables: Array<{ dispose(): void }> = [];
   const shadowTex = shadowTexture();
@@ -148,7 +144,7 @@ function start(renderer: THREE.WebGLRenderer, catGltf: Gltf, propsGltf: Gltf): (
     return light;
   });
 
-  const cat = makeCat(catGltf, handheld ? 24 : 40);
+  const cat = makeCat(catGltf);
   scene.add(cat.root);
   const catShadow = shadow();
   const catShadowMaterial = (catShadow.children[0] as THREE.Mesh).material as THREE.MeshBasicMaterial;
@@ -270,7 +266,7 @@ function start(renderer: THREE.WebGLRenderer, catGltf: Gltf, propsGltf: Gltf): (
 
     const watching = pointer.on && sit > 0.5;
     if (watching) look.set(pointer.x - W / 2, H / 2 - pointer.y, 700);
-    cat.update({ sit, leap: f, air, stride, look: watching ? look : null }, dt, t, keyDir);
+    cat.update({ sit, leap: f, air, stride, look: watching ? look : null }, dt, t);
 
     const lift = 1 - Math.min(0.7, hop / (k * 1.2));
     catShadow.position.set(x, y + 0.004 * k, z);

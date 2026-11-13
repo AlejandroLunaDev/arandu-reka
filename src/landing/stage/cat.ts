@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import type { GLTF } from "three/addons/loaders/GLTFLoader.js";
-import { growFur } from "./fur";
 import { tokenColor } from "./palette";
 
 // Arandu, from public/models/arandu.glb (built by blender/arandu): feet at the origin, facing +X,
@@ -25,7 +24,7 @@ export type Cat = {
   root: THREE.Group;
   /** Turn the cat about Y through this group. */
   yaw: THREE.Group;
-  update(pose: CatPose, dt: number, time: number, keyDir: THREE.Vector3): void;
+  update(pose: CatPose, dt: number, time: number): void;
   dispose(): void;
 };
 
@@ -41,14 +40,35 @@ type Rig = {
 const AX = { x: new THREE.Vector3(1, 0, 0), y: new THREE.Vector3(0, 1, 0), z: new THREE.Vector3(0, 0, 1) };
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 
-export function makeCat(gltf: GLTF, layers: number): Cat {
+// A black cat on a dark page: a violet rim keeps his outline. The camera is orthographic, so every
+// fragment looks straight down -Z.
+const RIM = /* glsl */ `
+#include <emissivemap_fragment>
+float rimFresnel = pow(1.0 - clamp(dot(normal, vec3(0.0, 0.0, 1.0)), 0.0, 1.0), 3.0);
+totalEmissiveRadiance += uRimColor * (0.35 * rimFresnel);
+`;
+
+function addRim(m: THREE.MeshStandardMaterial) {
+  m.onBeforeCompile = (shader) => {
+    shader.uniforms.uRimColor = { value: tokenColor("violet-400") };
+    shader.fragmentShader = shader.fragmentShader
+      .replace("#include <common>", "#include <common>\nuniform vec3 uRimColor;")
+      .replace("#include <emissivemap_fragment>", RIM);
+  };
+  m.customProgramCacheKey = () => "arandu-rim";
+}
+
+export function makeCat(gltf: GLTF): Cat {
   const model = gltf.scene;
   const furs: THREE.SkinnedMesh[] = [];
   model.traverse((o) => {
     if (!(o instanceof THREE.Mesh)) return;
     o.frustumCulled = false;
     const m = o.material as THREE.MeshStandardMaterial;
-    if (m.name === "AranduFur" && o instanceof THREE.SkinnedMesh) furs.push(o);
+    if (m.name === "AranduFur" && o instanceof THREE.SkinnedMesh) {
+      furs.push(o);
+      addRim(m);
+    }
     if (m.name === "AranduEye") {
       m.emissive = tokenColor("amber-300");
       m.emissiveIntensity = 0.35;
@@ -60,7 +80,6 @@ export function makeCat(gltf: GLTF, layers: number): Cat {
   });
   const furMesh = furs[0];
   if (!furMesh) throw new Error("arandu.glb has no AranduFur skinned mesh");
-  const fur = growFur(furMesh, layers, { rim: tokenColor("violet-400"), sheen: tokenColor("cream-50") });
 
   // Rest orientation of every bone, in model space: the model is not placed yet.
   model.updateMatrixWorld(true);
@@ -120,7 +139,7 @@ export function makeCat(gltf: GLTF, layers: number): Cat {
   return {
     root,
     yaw,
-    update(p, dt, time, keyDir) {
+    update(p, dt, time) {
       for (const r of Object.values(rig)) if (r.clip) r.bone.quaternion.copy(r.clip);
       act.sit?.setEffectiveWeight(p.sit);
       act.walk?.setEffectiveWeight((1 - p.sit) * (1 - p.air));
@@ -173,13 +192,9 @@ export function makeCat(gltf: GLTF, layers: number): Cat {
         const r = rig[`ear${side}`];
         if (r) pose(`ear${side}`, [[earAxis.copy(r.dir).cross(back).normalize(), 0.35 * Math.sin(Math.PI * twitch[side])]]);
       }
-
-      root.updateMatrixWorld(true);
-      fur.update(dt, time, keyDir);
     },
     dispose() {
       mixer.stopAllAction();
-      fur.dispose();
       model.traverse((o) => {
         if (!(o instanceof THREE.Mesh)) return;
         o.geometry.dispose();
