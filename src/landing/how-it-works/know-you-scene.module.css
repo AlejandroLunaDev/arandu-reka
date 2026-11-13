@@ -1,0 +1,44 @@
+/*
+ * --room-k is how many pixels the stage draws a metre with. The room's origin is the phone's
+ * bottom-left corner; its shelves reach 1.2 m to the right of the phone (see stage/rooms.ts,
+ * knowYouRoom), so the space beside it is kept here.
+ */
+.shelf {
+  --room-k: 170;
+  display: flex;
+  align-items: flex-end;
+}
+
+.phone {
+  display: flex;
+  flex: none;
+}
+
+.beside {
+  position: relative;
+  flex: none;
+  align-self: stretch;
+  width: calc(var(--room-k) * 1.2px);
+}
+
+/* Without WebGL, the drawn cat sits where the 3D cat would. */
+.fallback {
+  display: none;
+}
+
+:global(.no3d) .fallback {
+  display: block;
+  position: absolute;
+  left: calc(var(--room-k) * 0.6px);
+  bottom: calc(var(--room-k) * 0.9px);
+  width: calc(var(--room-k) * 0.6px);
+  height: auto;
+  translate: -50% 0;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+@media (width < 768px) {
+  .shelf {
+    --room-k: 100;
+  }
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Arandu Reka · Questionário, 4 de 6</title>
+<link rel="stylesheet" href="../ds/tokens.css">
+<link rel="stylesheet" href="../ds/bundle.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&amp;family=Lexend:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:var(--primary)}a:hover{color:var(--text)}
+.ar-btn{text-decoration:none}
+.scr{position:relative;width:390px;height:844px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--font-body)}
+.bar{display:flex;align-items:center;gap:8px;height:36px;padding:12px 12px 0;flex:none}
+.who{font-size:13px;line-height:16px;font-weight:500}
+.meta{margin-left:auto;padding-right:4px;font-size:12px;line-height:16px;color:var(--text-muted)}
+.head{width:24px;height:24px;display:block;flex:none}
+.prog{flex-grow:1;height:3px;margin:0 4px;border-radius:999px;background:var(--surface-raised);overflow:hidden}
+.prog>i{display:block;height:100%;border-radius:999px;background:var(--primary-fill)}
+.body{flex-grow:1;min-height:0;padding:24px 16px 16px;display:flex;flex-direction:column;gap:16px}
+.q{margin:0;font-family:var(--font-display);font-size:17px;line-height:24px;font-weight:600;max-width:330px;text-wrap:pretty}
+.say{margin:0;font-size:15px;line-height:22px;max-width:330px}
+.txt{margin:0;font-size:14px;line-height:20px}
+.hl{color:var(--accent-text)}
+.mut{color:var(--text-muted)}
+.cap{margin:0;font-size:12px;line-height:16px;color:var(--text-muted)}
+.lbl{margin:0;font-size:11px;line-height:14px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
+.h1{margin:0;font-family:var(--font-display);font-size:22px;line-height:28px;font-weight:700;letter-spacing:-.01em}
+.h2{margin:0;font-family:var(--font-display);font-size:15px;line-height:20px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:12px 8px}
+.stack{display:flex;flex-direction:column;gap:8px}
+.foot{flex:none;padding:12px 16px 24px;display:flex;flex-direction:column;gap:8px}
+.foot>.ar-btn{width:100%}
+.opt{width:100%;margin:0;text-align:left;font:inherit;color:var(--text);flex-direction:row;align-items:center;gap:12px}
+.opt__b{display:flex;flex-direction:column;gap:2px;min-width:0;flex-grow:1}
+.opt__t{font-size:14px;line-height:20px;font-weight:500}
+.opt .tick{color:var(--primary);width:16px;height:16px}
+.paw{fill:currentColor;flex:none;display:block}
+.cat{filter:drop-shadow(1px 0 0 var(--violet-500)) drop-shadow(-1px 0 0 var(--violet-500)) drop-shadow(0 -1px 0 var(--violet-500)) drop-shadow(0 1px 0 var(--violet-500))}
+.paw.paw--line{fill:none;stroke:currentColor;stroke-width:1.4}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav{flex:none;display:flex;border-top:1px solid var(--border);padding:4px 8px 18px;background:var(--bg)}
+.nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0 4px;font-size:11px;line-height:14px;color:var(--text-muted);text-decoration:none}
+.nav a[aria-current="page"]{color:var(--text);font-weight:500}
+.nav .ar-icon{width:20px;height:20px}
+.dl{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px 12px;margin:0}
+.dl dt{font-size:12px;line-height:18px;color:var(--text-muted)}
+.dl dd{margin:0;font-size:13px;line-height:18px}
+.stops{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.stop{display:flex;align-items:center;gap:12px}
+.pad{box-sizing:border-box;width:48px;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;flex:none}
+.pad--done{background:var(--text);color:var(--bg)}
+.pad--now{width:56px;height:56px;background:var(--ink-950);color:var(--accent);filter:drop-shadow(1px 0 0 var(--primary)) drop-shadow(-1px 0 0 var(--primary)) drop-shadow(0 -1px 0 var(--primary)) drop-shadow(0 2px 0 var(--primary))}
+.pad--next{background:var(--surface);border:1px solid var(--border-strong);color:var(--text-muted)}
+.ok{display:inline-flex;align-items:center;gap:4px;font-size:12px;line-height:16px;font-weight:500;color:var(--success)}
+.tg{display:inline-flex;align-items:center;height:20px;padding:0 6px;box-sizing:border-box;border:1px solid var(--border-strong);border-radius:6px;font-size:11px;line-height:14px;font-weight:500;color:var(--text-muted);white-space:nowrap}
+.tg--route{color:var(--text);border-color:var(--primary)}
+.num{font-family:var(--font-display);font-weight:700;font-size:22px;line-height:28px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.row{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:14px;background:var(--surface);color:var(--text);text-decoration:none}
+.row:hover{border-color:var(--border-strong);color:var(--text)}
+.row>.ar-icon{flex:none;width:16px;height:16px;color:var(--text-muted)}
+.src{display:inline-flex;align-items:center;gap:4px;font-size:12px;line-height:16px}
+.src .ar-icon{width:14px;height:14px}
+.ed{width:100%;border-collapse:collapse;font-size:12px;line-height:16px}
+.ed th{text-align:left;font-weight:500;color:var(--text-muted);padding:4px 0}
+.ed td{padding:4px 0;border-top:1px solid var(--border);font-variant-numeric:tabular-nums}
+.ed td:last-child,.ed th:last-child{text-align:right}
+.post{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:14px;background:var(--surface);color:var(--text);text-decoration:none;overflow:hidden}
+.post:hover{border-color:var(--border-strong);color:var(--text)}
+.post__b{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:0 12px 12px}
+.post__b>span:last-child{align-self:stretch}
+.post .ar-icon{flex:none;width:16px;height:16px;color:var(--text-muted)}
+.ph{position:relative;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden;background:var(--surface-raised)}
+.ph>img{width:100%;height:100%;object-fit:cover;display:block}
+.cr{position:absolute;right:6px;bottom:6px;padding:1px 5px;border-radius:4px;background:rgb(9 9 13 / .62);color:#fff;font-size:10px;line-height:14px;text-decoration:none}
+a.cr:hover{color:#fff;text-decoration:underline}
+.lg{flex:none;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;padding:4px 6px;border:1px solid var(--border);border-radius:8px;background:var(--cream-50)}
+.lg>img{display:block}
+</style>
+<style>html,body{margin:0;background:var(--bg);overflow:hidden}a{cursor:default}</style>
+</head>
+<body inert>
+<main class="scr" data-theme="dark">
+  <header class="bar">
+    <a tabindex="-1" class="ar-btn ar-btn--ghost ar-btn--icon" aria-label="Fechar"><svg class="ar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></a>
+    <div class="prog" role="progressbar" aria-label="Progresso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="67"><i style="width:67%"></i></div>
+    <span class="meta" style="margin-left:4px">4 de 6</span>
+  </header>
+  <section class="body" style="gap:12px">
+    <p class="q">O que você mais gosta de fazer no seu <span class="hl">tempo livre</span>?</p>
+    <p class="cap">Escolha a que mais tem a ver com você.</p>
+    <div role="radiogroup" aria-label="Tempo livre" class="stack" style="gap:10px;padding-top:16px">
+      <button tabindex="-1" type="button" role="radio" aria-checked="true" class="ar-card ar-card--interactive ar-card--selected opt">
+        <span class="opt__b"><span class="opt__t">Ouvir os amigos e ajudar a resolver</span><span class="cap">Todo mundo vem conversar comigo.</span></span>
+        <svg class="ar-icon tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </button>
+      <button tabindex="-1" type="button" role="radio" aria-checked="false" class="ar-card ar-card--interactive opt">
+        <span class="opt__b"><span class="opt__t">Ler, ver séries e documentários</span><span class="cap">Gosto de entender por que as pessoas fazem o que fazem.</span></span>
+        
+      </button>
+      <button tabindex="-1" type="button" role="radio" aria-checked="false" class="ar-card ar-card--interactive opt">
+        <span class="opt__b"><span class="opt__t">Criar: desenhar, escrever, editar vídeo</span></span>
+        
+      </button>
+      <button tabindex="-1" type="button" role="radio" aria-checked="false" class="ar-card ar-card--interactive opt">
+        <span class="opt__b"><span class="opt__t">Esporte e coisas ao ar livre</span></span>
+        
+      </button>
+      <button tabindex="-1" type="button" role="radio" aria-checked="false" class="ar-card ar-card--interactive opt">
+        <span class="opt__b"><span class="opt__t">Jogos, computador, programar</span></span>
+        
+      </button>
+    </div>
+  </section>
+  <footer class="foot">
+    <a tabindex="-1" class="ar-btn ar-btn--primary">Continuar</a>
+  </footer>
+</main>
+</body>
+</html>

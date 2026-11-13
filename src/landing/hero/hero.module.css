@@ -1,0 +1,39 @@
+/*
+ * The room's footprint. --room-k is how many pixels the stage draws a metre with: the 3D room is
+ * 1.8 m by 1.8 m, its origin on this box's bottom-left corner (see stage/rooms.ts, heroRoom).
+ * --room-pendant 0 takes the hanging lamp out, where its cord would cross the copy.
+ */
+.room {
+  --room-k: 200;
+  --room-pendant: 1;
+  position: relative;
+  flex: none;
+  width: calc(var(--room-k) * 1.8px);
+  height: calc(var(--room-k) * 1.8px);
+}
+
+/* Without WebGL, the drawn cat sits on a plain plank where the 3D cat would. */
+.fallback {
+  display: none;
+}
+
+:global(.no3d) .room {
+  border-bottom: 1px solid var(--border-strong);
+}
+
+:global(.no3d) .fallback {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--room-k) * 0.8px);
+  width: calc(var(--room-k) * 0.7px);
+  height: auto;
+  translate: -50% 0;
+}
+
+@media (width < 768px) {
+  .room {
+    --room-k: 150;
+    --room-pendant: 0;
+  }
+}

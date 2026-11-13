@@ -1,11 +1,18 @@
 @import "tailwindcss";
 @import "../design-system/tokens.css";
+/* The design system's component classes (ar-btn, ar-icon...), the same file the app's static screens load. */
+@import "../../public/ds/bundle.css" layer(components);
 
 /* Only the app's code holds class names: keep Tailwind from reading tokens.json and Blender scripts. */
 @source not "../design-system/tokens.json";
 @source not "../../blender";
 
 @layer base {
+  :root {
+    /* The fixed nav's height: the pinned scenes start under it. */
+    --nav-height: 56px;
+  }
+
   body {
     @apply bg-bg text-text type-body antialiased;
   }

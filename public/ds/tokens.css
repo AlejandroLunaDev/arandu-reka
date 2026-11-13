@@ -1,0 +1,103 @@
+/* Arandu Reka — generated from tokens.json */
+:root, [data-theme="dark"] {
+  --bg: #09090d;
+  --surface: #15131b;
+  --surface-raised: #1f1c27;
+  --border: #2e2a38;
+  --border-strong: #6f6880;
+  --text: #f1ebdd;
+  --text-muted: #a9a2b4;
+  --primary: #9b72cf;
+  --primary-fill: #6b3fa0;
+  --primary-fill-hover: #7a4bb3;
+  --primary-tint: #1c1029;
+  --on-primary: #f1ebdd;
+  --accent: #d99a32;
+  --on-accent: #09090d;
+  --accent-text: #d99a32;
+  --success: #4fbf85;
+  --warning: #f0904a;
+  --error: #ef5d6c;
+  --chart-1: #9b72cf;
+  --chart-2: #1f9e90;
+  --chart-3: #bc7f1e;
+  --chart-4: #d9608f;
+  --chart-5: #4f86db;
+  --chart-other: #6f6880;
+  --chart-seq-1: #6b3fa0;
+  --chart-seq-2: #8456bc;
+  --chart-seq-3: #9b72cf;
+  --chart-seq-4: #b597dd;
+  --chart-seq-5: #d0bcea;
+  --chart-seq-6: #d0bcea;
+  --violet-50: #f4effa;
+  --violet-100: #e7ddf4;
+  --violet-200: #d0bcea;
+  --violet-300: #b597dd;
+  --violet-400: #9b72cf;
+  --violet-500: #8456bc;
+  --violet-600: #6b3fa0;
+  --violet-700: #573383;
+  --violet-800: #432765;
+  --violet-900: #2e1b46;
+  --violet-950: #1c1029;
+  --amber-50: #fcf4e6;
+  --amber-100: #f8e6c4;
+  --amber-200: #f1cd8a;
+  --amber-300: #e9b75e;
+  --amber-400: #e0a845;
+  --amber-500: #d99a32;
+  --amber-600: #b97f22;
+  --amber-700: #8a5a12;
+  --amber-800: #6e4a14;
+  --amber-900: #4a320e;
+  --ink-950: #09090d;
+  --ink-900: #15131b;
+  --ink-850: #1f1c27;
+  --ink-800: #2e2a38;
+  --ink-700: #3a3645;
+  --ink-600: #57525f;
+  --ink-500: #6f6880;
+  --ink-400: #a9a2b4;
+  --cream-300: #ddd3c0;
+  --cream-200: #e8e0cf;
+  --cream-100: #f1ebdd;
+  --cream-50: #fbf8f1;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+  --font-display: Outfit, system-ui, sans-serif;
+  --font-body: Lexend, system-ui, sans-serif;
+}
+
+/* Lamp on: a warm, still-dark room. Not a light theme. The selector beats [data-theme="dark"] on nested screens. */
+html[data-mode="lamp"], html[data-mode="lamp"] [data-theme="dark"], .lp[data-mode="lamp"], .lp[data-mode="lamp"] [data-theme="dark"] {
+  --bg: #120d07;
+  --surface: #1e160c;
+  --surface-raised: #2a1f11;
+  --border: #3d2e19;
+  --border-strong: #8a6b3f;
+  --text: #f8e6c4;
+  --text-muted: #c9ab7c;
+  --primary: #e0a845;
+  --primary-fill: #8a5a12;
+  --primary-fill-hover: #a06c1a;
+  --primary-tint: #2a1d0c;
+  --on-primary: #f8e6c4;
+  --accent: #b597dd;
+  --accent-text: #c9b0e8;
+  --on-accent: #120d07;
+  --ink-950: #120d07;
+  --ink-900: #1e160c;
+  --ink-850: #2a1f11;
+  --ink-800: #3d2e19;
+}
