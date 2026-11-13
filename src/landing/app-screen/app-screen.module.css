@@ -1,11 +1,12 @@
 /*
  * A phone frame. Its measures draw a device, not the interface, so they are not design tokens:
- * the screen inside is 390 by 844, scaled by --k (set from the frame's width).
+ * the screen inside is 390 by 844, scaled by --k (set from the frame's width). A scene may set
+ * --phone-width to draw it smaller.
  */
 .phone {
   position: relative;
   flex: none;
-  width: 240px;
+  width: var(--phone-width, 240px);
   aspect-ratio: 390 / 844;
   padding: 7px;
   border-radius: 36px;

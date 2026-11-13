@@ -1,10 +1,45 @@
 /*
+ * The copy: the title across the top, then the phone and the pitch side by side. Without room for
+ * the phone beside the pitch, the phone goes and the pitch sits under the title.
+ */
+.intro {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "head head"
+    "app pitch";
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.head {
+  grid-area: head;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.app {
+  grid-area: app;
+  --phone-width: 240px;
+}
+
+.pitch {
+  grid-area: pitch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+  max-width: 26rem;
+}
+
+/*
  * The room's footprint. --room-k is how many pixels the stage draws a metre with: the 3D room is
  * 1.8 m by 1.8 m, its origin on this box's bottom-left corner (see stage/rooms.ts, heroRoom).
  * --room-pendant 0 takes the hanging lamp out, where its cord would cross the copy.
  */
 .room {
-  --room-k: 200;
+  --room-k: 260;
   --room-pendant: 1;
   position: relative;
   flex: none;
@@ -31,9 +66,37 @@
   translate: -50% 0;
 }
 
+@media (width < 1280px) {
+  .app {
+    --phone-width: 200px;
+  }
+
+  .room {
+    --room-k: 210;
+  }
+}
+
+@media (width < 1024px) {
+  .intro {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "head"
+      "pitch";
+    gap: var(--space-4);
+  }
+
+  .app {
+    display: none;
+  }
+
+  .room {
+    --room-k: 180;
+  }
+}
+
 @media (width < 768px) {
   .room {
-    --room-k: 150;
+    --room-k: 185;
     --room-pendant: 0;
   }
 }

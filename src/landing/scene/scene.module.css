@@ -15,7 +15,7 @@
   position: sticky;
   top: 0;
   height: 100vh;
-  max-width: 1080px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: var(--nav-height) var(--space-6) 0;
   display: grid;
@@ -47,6 +47,17 @@
 
 .flip .copy {
   justify-self: end;
+}
+
+/* The hero lays out its own copy, and its room keeps its own width. */
+.hero .copy {
+  max-width: none;
+}
+
+@media (width >= 768px) {
+  .hero .pin {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
 }
 
 /*

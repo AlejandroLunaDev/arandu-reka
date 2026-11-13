@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Arandu Reka · Seu caminho</title>
+<link rel="stylesheet" href="../ds/tokens.css">
+<link rel="stylesheet" href="../ds/bundle.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&amp;family=Lexend:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:var(--primary)}a:hover{color:var(--text)}
+.ar-btn{text-decoration:none}
+.scr{position:relative;width:390px;height:844px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--font-body)}
+.bar{display:flex;align-items:center;gap:8px;height:36px;padding:12px 12px 0;flex:none}
+.who{font-size:13px;line-height:16px;font-weight:500}
+.meta{margin-left:auto;padding-right:4px;font-size:12px;line-height:16px;color:var(--text-muted)}
+.head{width:24px;height:24px;display:block;flex:none}
+.prog{flex-grow:1;height:3px;margin:0 4px;border-radius:999px;background:var(--surface-raised);overflow:hidden}
+.prog>i{display:block;height:100%;border-radius:999px;background:var(--primary-fill)}
+.body{flex-grow:1;min-height:0;padding:24px 16px 16px;display:flex;flex-direction:column;gap:16px}
+.q{margin:0;font-family:var(--font-display);font-size:17px;line-height:24px;font-weight:600;max-width:330px;text-wrap:pretty}
+.say{margin:0;font-size:15px;line-height:22px;max-width:330px}
+.txt{margin:0;font-size:14px;line-height:20px}
+.hl{color:var(--accent-text)}
+.mut{color:var(--text-muted)}
+.cap{margin:0;font-size:12px;line-height:16px;color:var(--text-muted)}
+.lbl{margin:0;font-size:11px;line-height:14px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
+.h1{margin:0;font-family:var(--font-display);font-size:22px;line-height:28px;font-weight:700;letter-spacing:-.01em}
+.h2{margin:0;font-family:var(--font-display);font-size:15px;line-height:20px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:12px 8px}
+.stack{display:flex;flex-direction:column;gap:8px}
+.foot{flex:none;padding:12px 16px 24px;display:flex;flex-direction:column;gap:8px}
+.foot>.ar-btn{width:100%}
+.opt{width:100%;margin:0;text-align:left;font:inherit;color:var(--text);flex-direction:row;align-items:center;gap:12px}
+.opt__b{display:flex;flex-direction:column;gap:2px;min-width:0;flex-grow:1}
+.opt__t{font-size:14px;line-height:20px;font-weight:500}
+.opt .tick{color:var(--primary);width:16px;height:16px}
+.paw{fill:currentColor;flex:none;display:block}
+.cat{filter:drop-shadow(1px 0 0 var(--violet-500)) drop-shadow(-1px 0 0 var(--violet-500)) drop-shadow(0 -1px 0 var(--violet-500)) drop-shadow(0 1px 0 var(--violet-500))}
+.paw.paw--line{fill:none;stroke:currentColor;stroke-width:1.4}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav{flex:none;display:flex;border-top:1px solid var(--border);padding:4px 8px 18px;background:var(--bg)}
+.nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0 4px;font-size:11px;line-height:14px;color:var(--text-muted);text-decoration:none}
+.nav a[aria-current="page"]{color:var(--text);font-weight:500}
+.nav .ar-icon{width:20px;height:20px}
+.dl{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px 12px;margin:0}
+.dl dt{font-size:12px;line-height:18px;color:var(--text-muted)}
+.dl dd{margin:0;font-size:13px;line-height:18px}
+.stops{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.stop{display:flex;align-items:center;gap:12px}
+.pad{box-sizing:border-box;width:48px;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;flex:none}
+.pad--done{background:var(--text);color:var(--bg)}
+.pad--now{width:56px;height:56px;background:var(--ink-950);color:var(--accent);filter:drop-shadow(1px 0 0 var(--primary)) drop-shadow(-1px 0 0 var(--primary)) drop-shadow(0 -1px 0 var(--primary)) drop-shadow(0 2px 0 var(--primary))}
+.pad--next{background:var(--surface);border:1px solid var(--border-strong);color:var(--text-muted)}
+.ok{display:inline-flex;align-items:center;gap:4px;font-size:12px;line-height:16px;font-weight:500;color:var(--success)}
+.tg{display:inline-flex;align-items:center;height:20px;padding:0 6px;box-sizing:border-box;border:1px solid var(--border-strong);border-radius:6px;font-size:11px;line-height:14px;font-weight:500;color:var(--text-muted);white-space:nowrap}
+.tg--route{color:var(--text);border-color:var(--primary)}
+.num{font-family:var(--font-display);font-weight:700;font-size:22px;line-height:28px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.row{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:14px;background:var(--surface);color:var(--text);text-decoration:none}
+.row:hover{border-color:var(--border-strong);color:var(--text)}
+.row>.ar-icon{flex:none;width:16px;height:16px;color:var(--text-muted)}
+.src{display:inline-flex;align-items:center;gap:4px;font-size:12px;line-height:16px}
+.src .ar-icon{width:14px;height:14px}
+.ed{width:100%;border-collapse:collapse;font-size:12px;line-height:16px}
+.ed th{text-align:left;font-weight:500;color:var(--text-muted);padding:4px 0}
+.ed td{padding:4px 0;border-top:1px solid var(--border);font-variant-numeric:tabular-nums}
+.ed td:last-child,.ed th:last-child{text-align:right}
+.post{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:14px;background:var(--surface);color:var(--text);text-decoration:none;overflow:hidden}
+.post:hover{border-color:var(--border-strong);color:var(--text)}
+.post__b{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:0 12px 12px}
+.post__b>span:last-child{align-self:stretch}
+.post .ar-icon{flex:none;width:16px;height:16px;color:var(--text-muted)}
+.ph{position:relative;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden;background:var(--surface-raised)}
+.ph>img{width:100%;height:100%;object-fit:cover;display:block}
+.cr{position:absolute;right:6px;bottom:6px;padding:1px 5px;border-radius:4px;background:rgb(9 9 13 / .62);color:#fff;font-size:10px;line-height:14px;text-decoration:none}
+a.cr:hover{color:#fff;text-decoration:underline}
+.lg{flex:none;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;padding:4px 6px;border:1px solid var(--border);border-radius:8px;background:var(--cream-50)}
+.lg>img{display:block}
+</style>
+<style>html,body{margin:0;background:var(--bg);overflow:hidden}a{cursor:default}</style>
+</head>
+<body inert>
+<main class="scr" data-theme="dark">
+  <section aria-label="O quarto do Arandu, com o seu caminho" style="position:relative;flex-grow:1;min-height:0;overflow:hidden">
+    <span aria-hidden="true" style="position:absolute;left:372px;top:0;width:1px;height:58px;background:var(--border-strong)"></span>
+    <span aria-hidden="true" style="position:absolute;left:358px;top:58px;width:30px;height:22px;border-radius:2px 2px 8px 8px;background:var(--ink-700)"></span>
+    <svg aria-hidden="true" viewBox="0 0 30 320" style="position:absolute;left:360px;top:78px;width:30px;height:320px" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"><path d="M12 0c-8 40 10 70 2 110s10 70 0 120-4 60 2 90"/><g fill="var(--text-muted)" stroke="none"><ellipse cx="20" cy="34" rx="7" ry="3.5" transform="rotate(-30 20 34)"/><ellipse cx="5" cy="78" rx="7" ry="3.5" transform="rotate(30 5 78)"/><ellipse cx="22" cy="132" rx="7" ry="3.5" transform="rotate(-30 22 132)"/><ellipse cx="4" cy="186" rx="7" ry="3.5" transform="rotate(30 4 186)"/><ellipse cx="18" cy="244" rx="7" ry="3.5" transform="rotate(-30 18 244)"/><ellipse cx="6" cy="296" rx="7" ry="3.5" transform="rotate(30 6 296)"/></g></svg>
+    <header style="position:absolute;left:16px;right:8px;top:12px;z-index:2;display:flex;align-items:center;gap:8px">
+      <div class="stack" style="gap:0"><span class="cap">Seu caminho</span><span style="font-family:var(--font-display);font-size:17px;line-height:22px;font-weight:700">Psicologia</span></div>
+      <span style="margin-left:auto"></span><span class="pill" aria-label="Sequência de 7 dias"><span style="color:var(--accent)"><svg class="paw " viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span>7 dias</span><a tabindex="-1" class="ar-btn ar-btn--ghost ar-btn--icon" aria-label="Sua estante, 3 livros"><svg class="ar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5c-2-1.5-5-2-8-1.5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg></a>
+    </header>
+    <div class="stack" style="position:absolute;left:16px;top:68px;gap:2px">
+      <p class="lbl">Matéria 1 de 2</p>
+      <h2 class="h2">Processos psicológicos básicos</h2>
+      <p class="cap">2 de 5 paradas · a bolinha fica no chão, no fim</p>
+    </div>
+    <ol aria-label="Paradas da matéria" style="list-style:none;margin:0;padding:0">
+      <li style="position:absolute;left:16px;top:162px;width:128px">
+      <div style="height:44px;display:flex;align-items:flex-end;gap:6px;padding:0 12px;justify-content:flex-start"><span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;flex:none;width:12px;height:34px;box-sizing:border-box;border-radius:2px 2px 1px 1px;background:var(--violet-600)"></span></div>
+      <span style="display:block;width:128px;height:6px;border-radius:3px;background:var(--surface-raised);border-bottom:2px solid var(--border-strong)"></span>
+      <div class="stack" style="gap:0;padding:6px 2px 0;text-align:left"><span style="font-size:13px;line-height:18px;font-weight:500;">Percepção</span><span class="cap" style="font-size:11px;line-height:14px">Feito</span></div>
+    </li>
+      <li style="position:absolute;right:16px;top:242px;width:128px">
+      <div style="height:44px;display:flex;align-items:flex-end;gap:6px;padding:0 12px;justify-content:flex-end"><span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;flex:none;width:12px;height:30px;box-sizing:border-box;border-radius:2px 2px 1px 1px;background:var(--amber-500)"></span></div>
+      <span style="display:block;width:128px;height:6px;border-radius:3px;background:var(--surface-raised);border-bottom:2px solid var(--border-strong)"></span>
+      <div class="stack" style="gap:0;padding:6px 2px 0;text-align:right"><span style="font-size:13px;line-height:18px;font-weight:500;">Atenção</span><span class="cap" style="font-size:11px;line-height:14px">Feito</span></div>
+    </li>
+      <li style="position:absolute;left:16px;top:340px;width:128px" aria-current="step">
+      <div style="height:44px;display:flex;align-items:flex-end;gap:6px;padding:0 12px;justify-content:flex-start"></div>
+      <span style="display:block;width:128px;height:6px;border-radius:3px;background:var(--surface-raised);border-bottom:2px solid var(--border-strong)"></span>
+      <div class="stack" style="gap:0;padding:6px 2px 0;text-align:left"><span style="font-size:13px;line-height:18px;font-weight:500;">Memória</span><span class="cap" style="font-size:11px;line-height:14px">Hoje</span></div>
+    </li>
+      <li style="position:absolute;right:16px;top:422px;width:128px">
+      <div style="height:44px;display:flex;align-items:flex-end;gap:6px;padding:0 12px;justify-content:flex-end"><span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;flex:none;width:12px;height:32px;box-sizing:border-box;border-radius:2px 2px 1px 1px;border:1px dashed var(--border-strong)"></span></div>
+      <span style="display:block;width:128px;height:6px;border-radius:3px;background:var(--surface-raised);border-bottom:2px solid var(--border-strong)"></span>
+      <div class="stack" style="gap:0;padding:6px 2px 0;text-align:right"><span style="font-size:13px;line-height:18px;font-weight:500;color:var(--text-muted);">Aprendizagem</span><span class="cap" style="font-size:11px;line-height:14px">Próxima</span></div>
+    </li>
+      <li style="position:absolute;left:16px;top:512px;width:128px">
+      <div style="height:44px;display:flex;align-items:flex-end;gap:6px;padding:0 12px;justify-content:flex-start"><span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;flex:none;width:12px;height:34px;box-sizing:border-box;border-radius:2px 2px 1px 1px;border:1px dashed var(--border-strong)"></span></div>
+      <span style="display:block;width:128px;height:6px;border-radius:3px;background:var(--surface-raised);border-bottom:2px solid var(--border-strong)"></span>
+      <div class="stack" style="gap:0;padding:6px 2px 0;text-align:left"><span style="font-size:13px;line-height:18px;font-weight:500;color:var(--text-muted);">Emoção e motivação</span><span class="cap" style="font-size:11px;line-height:14px"></span></div>
+    </li>
+    </ol>
+    <span aria-hidden="true" style="position:absolute;left:164px;top:216px;color:var(--text-muted);transform:rotate(128deg)"><svg class="paw " viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span><span aria-hidden="true" style="position:absolute;left:189px;top:236px;color:var(--text-muted);transform:rotate(128deg)"><svg class="paw " viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span><span aria-hidden="true" style="position:absolute;left:215px;top:256px;color:var(--text-muted);transform:rotate(128deg)"><svg class="paw " viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span>
+    <span aria-hidden="true" style="position:absolute;left:215px;top:301px;color:var(--text-muted);transform:rotate(226deg)"><svg class="paw " viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span><span aria-hidden="true" style="position:absolute;left:189px;top:325px;color:var(--text-muted);transform:rotate(226deg)"><svg class="paw " viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span><span aria-hidden="true" style="position:absolute;left:164px;top:350px;color:var(--text-muted);transform:rotate(226deg)"><svg class="paw " viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span>
+    <span aria-hidden="true" style="position:absolute;left:164px;top:395px;color:var(--border-strong);transform:rotate(129deg)"><svg class="paw paw--line" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span><span aria-hidden="true" style="position:absolute;left:189px;top:415px;color:var(--border-strong);transform:rotate(129deg)"><svg class="paw paw--line" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span><span aria-hidden="true" style="position:absolute;left:215px;top:436px;color:var(--border-strong);transform:rotate(129deg)"><svg class="paw paw--line" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span>
+    <span aria-hidden="true" style="position:absolute;left:215px;top:479px;color:var(--border-strong);transform:rotate(229deg)"><svg class="paw paw--line" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span><span aria-hidden="true" style="position:absolute;left:189px;top:501px;color:var(--border-strong);transform:rotate(229deg)"><svg class="paw paw--line" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span><span aria-hidden="true" style="position:absolute;left:164px;top:524px;color:var(--border-strong);transform:rotate(229deg)"><svg class="paw paw--line" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.8"/><ellipse cx="5.6" cy="10.4" rx="1.9" ry="2.4" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.4" cy="6.4" rx="2" ry="2.6" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="2" ry="2.6" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="10.4" rx="1.9" ry="2.4" transform="rotate(20 18.4 10.4)"/></svg></span>
+    <div style="position:absolute;left:56px;top:321px;z-index:1"><svg class="cat" viewBox="0 0 120 100" aria-hidden="true" style="width:76px;height:63px;display:block;overflow:visible;">
+    <path d="M78 97C99 99 107 84 99 71" fill="none" stroke="var(--ink-950)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M34 100C29 80 40 57 60 52C80 57 91 80 86 100Z" fill="var(--ink-950)"/>
+    <rect x="47" y="70" width="10" height="30" rx="5" fill="var(--ink-950)"/>
+    <rect x="63" y="70" width="10" height="30" rx="5" fill="var(--ink-950)"/>
+    <path d="M57.5 80V99.5M62.5 80V99.5" stroke="var(--ink-700)" stroke-width="1"/>
+    <path d="M41 28L43 6L57 20ZM79 28L77 6L63 20Z" fill="var(--ink-950)"/>
+    <path d="M44.5 23L45.5 11L53 19ZM75.5 23L74.5 11L67 19Z" fill="var(--violet-400)"/>
+    <ellipse cx="60" cy="34" rx="21" ry="18" fill="var(--ink-950)"/>
+    <ellipse cx="52" cy="33" rx="4.3" ry="4.8" fill="var(--amber-500)"/><ellipse cx="52" cy="33" rx="1.3" ry="3.7" fill="var(--ink-950)"/><ellipse cx="68" cy="33" rx="4.3" ry="4.8" fill="var(--amber-500)"/><ellipse cx="68" cy="33" rx="1.3" ry="3.7" fill="var(--ink-950)"/>
+    <path d="M57.5 41H62.5L60 43.5Z" fill="var(--violet-400)"/></svg></div>
+    <span aria-hidden="true" style="position:absolute;left:0;right:0;bottom:14px;height:1px;background:var(--border)"></span>
+    <span style="position:absolute;right:120px;bottom:15px;color:var(--accent)"><svg viewBox="0 0 48 48" aria-hidden="true" style="width:36px;height:36px;display:block" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="22" cy="22" r="17"/><path d="M8 15c9 1 19 7 25 19"/><path d="M6 24c9-1 19 3 26 13"/><path d="M14 8c3 9 11 18 23 22"/><path d="M27 6c-4 10-4 22 2 32"/><path d="M36 34c3 3 6 6 9 8"/></svg></span>
+    <span class="stack" style="position:absolute;right:16px;bottom:22px;gap:0;width:96px"><span style="font-size:13px;line-height:18px;font-weight:500">Bolinha</span><span class="cap" style="font-size:11px;line-height:14px">Conversa no fim da matéria</span></span>
+  </section>
+  <div style="flex:none;padding:14px 16px 12px;border-top:1px solid var(--border);border-radius:18px 18px 0 0;background:var(--surface);"><div style="display:flex;align-items:center;gap:12px">
+      <div class="stack" style="gap:2px;flex-grow:1;min-width:0"><p class="lbl">Sessão de hoje</p><p class="h2">Memória</p><p class="cap">Algo novo, um exercício e a sua pergunta · 20 min</p></div>
+      <a tabindex="-1" class="ar-btn ar-btn--primary" style="flex:none">Bora</a>
+    </div></div>
+  <nav class="nav" style="background:var(--surface);border-top-color:var(--surface)" aria-label="Principal">
+    <a tabindex="-1" aria-current="page"><svg class="ar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5L3.5 7v12.5L9 17l6 2.5 5.5-2.5V4.5L15 7 9 4.5z"/><path d="M9 4.5V17M15 7v12.5"/></svg>Caminho</a>
+    <a tabindex="-1"><svg class="ar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.5L12 5l8.5 4.5M5 20h14M6.5 11v6.5M10 11v6.5M14 11v6.5M17.5 11v6.5"/></svg>Faculdades</a>
+    <a tabindex="-1"><svg class="ar-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20c1.4-3.6 4.2-5.5 7.5-5.5s6.1 1.9 7.5 5.5"/></svg>Quem sou eu</a>
+    <a tabindex="-1"><svg class="ar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg>O que eles veem</a>
+  </nav>
+</main>
+</body>
+</html>
