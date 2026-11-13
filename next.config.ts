@@ -6,7 +6,10 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   turbopack: {
     rules: {
+      // CSS modules stay out: `as` would rename x.module.css to x.module.css.css, a global sheet,
+      // and their classes would come out undefined. They hold no Tailwind, only tokens.
       "*.css": {
+        condition: { not: { path: /\.module\.css$/ } },
         loaders: ["@tailwindcss/turbopack"],
         as: "*.css",
       },
