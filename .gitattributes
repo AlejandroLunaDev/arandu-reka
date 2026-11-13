@@ -1,0 +1,2 @@
+# Keep LF everywhere: npm run tokens:check compares tokens.css byte for byte.
+* text=auto eol=lf
