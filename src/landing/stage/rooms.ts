@@ -143,7 +143,11 @@ function base(anchor: HTMLElement, face: number) {
   return Object.assign(room, { content });
 }
 
-/** The hero: two wall shelves, a hanging lamp, and the cat waiting on the lower shelf. */
+/** The pendant lamp's shade hangs this far below the top of the pinned scene, and never lower. */
+const SHADE_DROP = 0.9;
+const SHADE_LOWEST = 1.75;
+
+/** The hero: a long shelf of books where the cat waits, a shorter one above it, a hanging lamp. */
 export function heroRoom(anchor: HTMLElement, { kit }: RoomTools): Room {
   const room = base(anchor, FACE.left);
   const { content } = room;
@@ -172,20 +176,21 @@ export function heroRoom(anchor: HTMLElement, { kit }: RoomTools): Room {
   put(upper, kit.make("ShelfMedium"), 0, 0);
   // The plant stands POT_EDGE (0.12 m) behind the shelf's front edge (0.17 m from its middle).
   put(upper, kit.make("PlantPot"), -0.36, 0, 0.05);
-  pileBooks(kit, upper, 0, 0, [
+  // The pile reaches 0.37 m right of where it starts; the lamp's dome is 0.14 m wide each side.
+  pileBooks(kit, upper, -0.21, 0, [
     ["BookThick", LOOK.v6, "Biologia"],
     ["BookShort", LOOK.c3, "Design"],
     ["BookPaperback", LOOK.i7, "História"],
   ]);
-  const mushroom = put(upper, kit.make("LampMushroom"), 0.36, 0);
+  const mushroom = put(upper, kit.make("LampMushroom"), 0.33, 0);
 
-  // The pendant lamp hangs from above the top of the screen. Where the copy sits above the room
-  // (one column), its cord would cross the copy: there the anchor's --room-pendant is 0 and the
-  // room goes without it.
+  // The pendant lamp hangs on a short cord from above the top of the screen. Where the copy sits
+  // above the room (one column), its cord would cross the copy: there the anchor's --room-pendant is
+  // 0 and the room goes without it.
   const pendant = kit.make("LampPendant");
   const cord = pendant.getObjectByName("LampPendantCord");
-  const LAMP_Y = 1.75;
-  put(content, pendant, 0.35, LAMP_Y);
+  put(content, pendant, 0.35, SHADE_LOWEST);
+  let lampY = SHADE_LOWEST;
 
   room.seat = seat;
   room.layout = () => {
@@ -193,14 +198,16 @@ export function heroRoom(anchor: HTMLElement, { kit }: RoomTools): Room {
     pendant.visible = getComputedStyle(anchor).getPropertyValue("--room-pendant").trim() !== "0";
     const lamp = pendant.visible ? pendant : mushroom;
     room.light = lamp.getObjectByName(pendant.visible ? "LampPendantLight" : "LampMushroomLight") ?? lamp;
-    // The cord reaches past the top of the pinned scene, wherever the anchor sits in it.
+    // How far the top of the pinned scene is above the shelf; the cord reaches a little past it.
     const pin = anchor.closest<HTMLElement>("[data-pin]") ?? anchor;
     const above = (anchor.getBoundingClientRect().bottom - pin.getBoundingClientRect().top) / room.k;
-    if (cord) cord.scale.y = Math.max(0.2, above - LAMP_Y + 0.4);
+    lampY = Math.max(SHADE_LOWEST, above - SHADE_DROP);
+    pendant.position.y = lampY;
+    if (cord) cord.scale.y = Math.max(0.2, above - lampY + 0.4);
   };
   room.reveal = (rise, drop) => {
     content.position.y = -0.5 * (1 - rise);
-    pendant.position.y = LAMP_Y + 1.6 * (1 - drop);
+    pendant.position.y = lampY + 1.6 * (1 - drop);
   };
   room.layout();
   return room;
