@@ -20,6 +20,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Blender scripts and their three.js preview are not part of the app.
     "blender/**",
+    // The Draco decoder is copied as is from three.js (three/examples/jsm/libs/draco/gltf).
+    "public/draco/**",
   ]),
 ]);
 
