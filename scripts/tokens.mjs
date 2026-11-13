@@ -35,6 +35,8 @@ export function generate(tokens) {
     "",
     ':root, [data-theme="dark"] {',
     ...colors.map((t) => `  --${t.name}: ${dark(t).toLowerCase()};`),
+    // The design system's own component CSS (public/ds/bundle.css) reads spacing as --space-N.
+    ...tokens.spacing.tokens.map((t) => `  --${t.name}: ${t.value};`),
     "}",
     "",
     '[data-theme="light"] {',

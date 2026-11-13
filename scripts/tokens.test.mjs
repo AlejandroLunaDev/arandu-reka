@@ -79,6 +79,14 @@ describe("tokens.css generation", () => {
     }
   });
 
+  it("writes every spacing token as a plain --space-N variable under :root and the dark theme", () => {
+    const root = block(css, ':root, [data-theme="dark"]');
+    assert.ok(tokens.spacing.tokens.length > 0);
+    for (const t of tokens.spacing.tokens) {
+      assert.ok(root.includes(`  --${t.name}: ${t.value};`), t.name);
+    }
+  });
+
   it("grows display and h1 on wide screens, and h2 not", () => {
     const display = block(css, "@utility type-display");
     assert.match(display, /@media \(width >= 768px\) \{\s+font-size: 36px;\s+line-height: 42px;/);

@@ -64,6 +64,12 @@
   --cream-200: #e8e0cf;
   --cream-100: #f1ebdd;
   --cream-50: #fbf8f1;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
 }
 
 [data-theme="light"] {
