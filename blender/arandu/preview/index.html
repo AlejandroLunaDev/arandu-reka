@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arandu preview</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; font: 12px/1.3 system-ui, sans-serif; color: #2a2233;
+    background: radial-gradient(120% 90% at 50% 40%, #f7f1e6 0%, #ece3d3 60%, #dcd0bc 100%); }
+  canvas { display: block; }
+  .hint { position: fixed; left: 12px; top: 10px; opacity: .55; }
+  .bar { position: fixed; left: 12px; bottom: 12px; display: flex; gap: 6px; }
+  .bar button { font: inherit; padding: 4px 9px; border-radius: 9px; border: 1px solid #2a223326;
+    background: #ffffffb3; color: #2a2233; cursor: pointer; }
+  .bar button[aria-pressed="true"] { background: #2a2233; color: #f7f1e6; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div class="hint">Drag to orbit · click the cat to make it jump · it follows your pointer</div>
+<div class="bar">
+  <button data-clip="sit">Sit</button>
+  <button data-clip="walk">Walk</button>
+  <button data-clip="jump">Jump</button>
+  <button data-clip="tap">Tap</button>
+  <button id="spin">Spin</button>
+  <button id="wind" aria-pressed="true">Wind</button>
+  <button id="fur" aria-pressed="true">Fur</button>
+</div>
+<script type="module" src="./fur.js"></script>
+</body>
+</html>
