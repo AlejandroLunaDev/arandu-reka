@@ -1,20 +1,15 @@
 /*
- * --room-k is how many pixels the stage draws a metre with. The room's origin is the phone's
- * bottom-left corner; its shelves reach 1.2 m to the right of the phone (see stage/rooms.ts,
- * knowYouRoom), so the space beside it is kept here.
+ * The phone, and beside it the room's footprint, as tall as the phone. --room-k is how many pixels
+ * the stage draws a metre with; the room's origin is this box's bottom-left corner, and its shelves
+ * reach 1.2 m to the right (see stage/rooms.ts, knowYouRoom).
  */
-.shelf {
+.art {
   --room-k: 170;
   display: flex;
   align-items: flex-end;
 }
 
-.phone {
-  display: flex;
-  flex: none;
-}
-
-.beside {
+.room {
   position: relative;
   flex: none;
   align-self: stretch;
@@ -38,7 +33,7 @@
 }
 
 @media (width < 768px) {
-  .shelf {
+  .art {
     --room-k: 100;
   }
 }

@@ -3,8 +3,8 @@ import { AppScreen } from "../app-screen/app-screen";
 import { Scene } from "../scene/scene";
 import styles from "./know-you-scene.module.css";
 
-// How it works, step 1: the first questions. The phone stands on a shelf and the cat waits beside it,
-// on the shelves the stage draws to its right.
+// How it works, step 1: the first questions, on the phone. Beside it, the stage draws two shelves
+// where the cat waits.
 export function KnowYouScene() {
   return (
     <Scene
@@ -26,11 +26,9 @@ export function KnowYouScene() {
         </>
       }
       art={
-        <div data-reveal-art className={styles.shelf}>
-          <div data-room="know-you" className={styles.phone}>
-            <AppScreen src="/screens/A4-Pergunta-tempo-livre.html" title="Tela do app: uma pergunta do questionário" />
-          </div>
-          <span className={styles.beside}>
+        <div data-reveal-art className={styles.art}>
+          <AppScreen src="/screens/A4-Pergunta-tempo-livre.html" title="Tela do app: uma pergunta do questionário" />
+          <span data-room="know-you" className={styles.room}>
             <Image className={styles.fallback} src="/img/cat.svg" alt="" width={600} height={370} />
           </span>
         </div>

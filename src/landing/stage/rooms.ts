@@ -36,12 +36,6 @@ export type Room = {
   reveal(rise: number, drop: number): void;
 };
 
-export type RoomTools = {
-  kit: Kit;
-  /** A soft contact shadow, 1 m by 1 m, lying flat. */
-  shadow(): THREE.Object3D;
-};
-
 /** A book on a shelf: its shape, its look, the degree course it is about, and whether it leans. */
 type Shelved = [BookName, BookLook, string] | [BookName, BookLook, string, "lean"];
 
@@ -148,7 +142,7 @@ const SHADE_DROP = 0.9;
 const SHADE_LOWEST = 1.75;
 
 /** The hero: a long shelf of books where the cat waits, a shorter one above it, a hanging lamp. */
-export function heroRoom(anchor: HTMLElement, { kit }: RoomTools): Room {
+export function heroRoom(anchor: HTMLElement, kit: Kit): Room {
   const room = base(anchor, FACE.left);
   const { content } = room;
 
@@ -213,19 +207,13 @@ export function heroRoom(anchor: HTMLElement, { kit }: RoomTools): Room {
   return room;
 }
 
-/** "O Arandu te conhece": the phone stands on its shelf; the cat waits higher up, beside it. */
-export function knowYouRoom(anchor: HTMLElement, { kit, shadow }: RoomTools): Room {
+/** "O Arandu te conhece": two shelves on the wall beside the phone; the cat waits on the lower one. */
+export function knowYouRoom(anchor: HTMLElement, kit: Kit): Room {
   const room = base(anchor, FACE.right);
   const { content } = room;
 
-  // The anchor is the phone: its shelf and shadow, and everything to its right, follow its width.
-  const under = put(content, kit.make("ShelfLarge"), 0, 0);
-  const phoneShadow = put(content, shadow(), 0, 0.002, 0);
-
-  const right = new THREE.Group();
-  content.add(right);
   const mid = new THREE.Group();
-  put(right, mid, 0.66, 0.9);
+  put(content, mid, 0.66, 0.9);
   put(mid, kit.make("ShelfMedium"), 0, 0);
   const end = standBooks(kit, mid, -0.49, 0, [
     ["BookThick", LOOK.a8, "Arquitetura"],
@@ -235,26 +223,13 @@ export function knowYouRoom(anchor: HTMLElement, { kit, shadow }: RoomTools): Ro
   const lamp = put(mid, kit.make("LampClassic"), 0.34, 0);
 
   const top = new THREE.Group();
-  put(right, top, 0.66, 1.9);
+  put(content, top, 0.66, 1.9);
   put(top, kit.make("ShelfSmall"), 0, 0);
   put(top, kit.make("LampDesk"), -0.18, 0);
   put(top, kit.book("BookTall", LOOK.v4, "Direito"), 0.07, 0);
   put(top, kit.make("Ball"), 0.19, 0, 0.04);
 
-  const fit = () => {
-    const w = anchor.getBoundingClientRect().width / room.k;
-    under.position.x = w / 2;
-    phoneShadow.position.x = w / 2;
-    phoneShadow.scale.set(w * 1.05, 1, 0.14);
-    right.position.x = w;
-  };
-
   room.seat = seat;
   room.light = lamp.getObjectByName("LampClassicLight") ?? lamp;
-  room.layout = () => {
-    room.k = readK(anchor);
-    fit();
-  };
-  room.layout();
   return room;
 }

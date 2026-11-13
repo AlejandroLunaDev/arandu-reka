@@ -4,8 +4,8 @@ import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { makeCat } from "./cat";
 import { tokenColor } from "./palette";
-import { makeKit } from "./props";
-import { heroRoom, knowYouRoom, TILT, type Room, type RoomTools } from "./rooms";
+import { makeKit, type Kit } from "./props";
+import { heroRoom, knowYouRoom, TILT, type Room } from "./rooms";
 
 // The landing's 3D layer: one fixed canvas over the page that never takes clicks. Each scene with a
 // [data-room] anchor gets its room of shelves, and Arandu follows the scroll from room to room. While
@@ -13,7 +13,7 @@ import { heroRoom, knowYouRoom, TILT, type Room, type RoomTools } from "./rooms"
 // to its seat. If WebGL or the models fail, <html> gets the "no3d" class and the page shows its
 // drawn cats instead.
 
-const BUILD: Record<string, (anchor: HTMLElement, tools: RoomTools) => Room> = {
+const BUILD: Record<string, (anchor: HTMLElement, kit: Kit) => Room> = {
   hero: heroRoom,
   "know-you": knowYouRoom,
 };
@@ -108,30 +108,11 @@ function start(renderer: THREE.WebGLRenderer, catGltf: Gltf, propsGltf: Gltf): (
   back.position.set(-1.5, 0.8, -1);
   scene.add(back);
 
-  const disposables: Array<{ dispose(): void }> = [];
-  const shadowTex = shadowTexture();
-  disposables.push(shadowTex);
-  const shadowGeo = new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2);
-  disposables.push(shadowGeo);
-  const shadow = () => {
-    const material = new THREE.MeshBasicMaterial({
-      color: tokenColor("ink-950"),
-      alphaMap: shadowTex,
-      transparent: true,
-      opacity: 0.55,
-      depthWrite: false,
-    });
-    disposables.push(material);
-    const holder = new THREE.Group();
-    holder.add(new THREE.Mesh(shadowGeo, material));
-    return holder;
-  };
-
   const kit = makeKit(propsGltf);
   const rooms = [...document.querySelectorAll<HTMLElement>("[data-room]")].map((anchor) => {
     const build = BUILD[anchor.dataset.room ?? ""];
     if (!build) throw new Error(`Unknown room: ${anchor.dataset.room}`);
-    const room = build(anchor, { kit, shadow });
+    const room = build(anchor, kit);
     scene.add(room.group);
     return room;
   });
@@ -147,8 +128,17 @@ function start(renderer: THREE.WebGLRenderer, catGltf: Gltf, propsGltf: Gltf): (
 
   const cat = makeCat(catGltf);
   scene.add(cat.root);
-  const catShadow = shadow();
-  const catShadowMaterial = (catShadow.children[0] as THREE.Mesh).material as THREE.MeshBasicMaterial;
+  // The cat's soft shadow, 1 m by 1 m, lying flat under him.
+  const shadowTex = shadowTexture();
+  const shadowGeo = new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2);
+  const catShadowMaterial = new THREE.MeshBasicMaterial({
+    color: tokenColor("ink-950"),
+    alphaMap: shadowTex,
+    transparent: true,
+    opacity: 0.55,
+    depthWrite: false,
+  });
+  const catShadow = new THREE.Mesh(shadowGeo, catShadowMaterial);
   scene.add(catShadow);
 
   // The cat leaves room i - 1 for room i while the scene of room i comes in: from when its top is
@@ -287,6 +277,8 @@ function start(renderer: THREE.WebGLRenderer, catGltf: Gltf, propsGltf: Gltf): (
     watcher.disconnect();
     cat.dispose();
     kit.dispose();
-    disposables.forEach((d) => d.dispose());
+    shadowTex.dispose();
+    shadowGeo.dispose();
+    catShadowMaterial.dispose();
   };
 }
