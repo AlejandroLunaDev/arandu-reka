@@ -20,12 +20,13 @@ export type PropName =
   | "YarnBall"
   | "Ball";
 
-/** A book's dress: the token names of its cover and of the two bands across its spine. */
+/** A book's dress: the token names of its cover and of its print (title and bands). */
 export type BookLook = { cover: string; band: string };
 
 export type Kit = {
   make(name: PropName): THREE.Object3D;
-  book(name: BookName, look: BookLook): THREE.Object3D;
+  /** A book with a degree course for title, written down its spine and across its covers. */
+  book(name: BookName, look: BookLook, career: string): THREE.Object3D;
   /** Width (x), height (y) and depth (z) of a prop, in metres. */
   size(name: PropName): THREE.Vector3;
   tick(time: number): void;
@@ -105,40 +106,73 @@ export function makeKit(gltf: GLTF): Kit {
     return o;
   };
 
-  // One spine texture and one cover material per look, shared by every book that wears it.
-  const looks = new Map<string, { cover: THREE.MeshStandardMaterial; spine: THREE.MeshStandardMaterial }>();
-  const dress = (look: BookLook) => {
-    const key = `${look.cover}/${look.band}`;
-    let d = looks.get(key);
-    if (!d) {
-      const canvas = document.createElement("canvas");
-      canvas.width = 32;
-      canvas.height = 128;
-      const g = canvas.getContext("2d")!;
-      g.fillStyle = tokenValue(look.cover);
-      g.fillRect(0, 0, 32, 128);
-      g.fillStyle = tokenValue(look.band);
-      g.fillRect(0, 12, 32, 5);
-      g.fillRect(0, 106, 32, 5);
-      const map = new THREE.CanvasTexture(canvas);
-      map.colorSpace = THREE.SRGBColorSpace;
-      // glTF UVs put v = 0 at the top of the image.
-      map.flipY = false;
-      const spine = new THREE.MeshStandardMaterial({ map, roughness: 0.6 });
-      const cover = new THREE.MeshStandardMaterial({ color: tokenColor(look.cover), roughness: 0.6 });
-      owned.push(map, spine, cover);
-      d = { cover, spine };
-      looks.set(key, d);
-    }
-    return d;
+  // A book's print, drawn on a canvas as tall as TEXTURE_HEIGHT and as wide as the face's proportions
+  // ask, filled with the cover color. glTF UVs put v = 0 at the top of the image: the top of the
+  // canvas is the top of the book.
+  const TEXTURE_HEIGHT = 512;
+  const paint = (cover: string, width: number, height: number, draw: (g: CanvasRenderingContext2D, w: number, h: number) => void) => {
+    const canvas = document.createElement("canvas");
+    canvas.height = TEXTURE_HEIGHT;
+    canvas.width = Math.max(8, Math.round((TEXTURE_HEIGHT * width) / height));
+    const g = canvas.getContext("2d");
+    if (!g) throw new Error("No 2D canvas for the book textures");
+    g.fillStyle = cover;
+    g.fillRect(0, 0, canvas.width, canvas.height);
+    draw(g, canvas.width, canvas.height);
+    const map = new THREE.CanvasTexture(canvas);
+    map.colorSpace = THREE.SRGBColorSpace;
+    map.flipY = false;
+    map.anisotropy = 4;
+    const material = new THREE.MeshStandardMaterial({ map, roughness: 0.6 });
+    owned.push(map, material);
+    return material;
   };
 
-  const book = (name: BookName, look: BookLook) => {
+  // Writes text centred on the canvas origin, in the display font, shrunk to fit maxWidth.
+  const write = (g: CanvasRenderingContext2D, text: string, size: number, maxWidth: number) => {
+    const font = tokenValue("font-display");
+    g.font = `600 ${size}px ${font}`;
+    const fit = Math.min(size, (size * maxWidth) / g.measureText(text).width);
+    g.font = `600 ${fit}px ${font}`;
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    g.fillText(text, 0, 0);
+  };
+
+  // Each book gets its own spine and covers: no two carry the same title and proportions.
+  const dress = (name: BookName, look: BookLook, career: string) => {
+    const s = size(name);
+    const cover = tokenValue(look.cover);
+    const print = tokenValue(look.band);
+    // The spine wraps round the book's rounded corners: about 1.45 times its thickness. u runs across
+    // it, left to right seen from the front; the title reads down it, as on a real spine, as tall as
+    // the front of the spine allows and as long as the space between its bands.
+    const spine = paint(cover, s.x * 1.45, s.y, (g, w, h) => {
+      g.fillStyle = print;
+      g.fillRect(0, h * 0.09, w, h * 0.035);
+      g.fillRect(0, h * 0.83, w, h * 0.035);
+      g.translate(w / 2, h * 0.47);
+      g.rotate(Math.PI / 2);
+      write(g, career, w * 0.56, h * 0.66);
+    });
+    // Both covers map their flat part, from the spine's edge to the fore-edge, onto the full image.
+    // The board edges sample its top-right corner, which stays plain.
+    const covers = paint(cover, s.z * 0.88, s.y, (g, w, h) => {
+      g.fillStyle = print;
+      g.fillRect(w * 0.12, h * 0.14, w * 0.76, h * 0.01);
+      g.fillRect(w * 0.12, h * 0.46, w * 0.76, h * 0.01);
+      g.translate(w / 2, h * 0.3);
+      write(g, career, w * 0.17, w * 0.76);
+    });
+    return { spine, covers };
+  };
+
+  const book = (name: BookName, look: BookLook, career: string) => {
     const o = make(name);
-    const d = dress(look);
+    const d = dress(name, look, career);
     o.traverse((m) => {
       if (!(m instanceof THREE.Mesh)) return;
-      if (m.material.name === "BookCover") m.material = d.cover;
+      if (m.material.name === "BookCover") m.material = d.covers;
       if (m.material.name === "BookSpine") m.material = d.spine;
     });
     return o;

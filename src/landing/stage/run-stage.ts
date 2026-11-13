@@ -73,7 +73,8 @@ export function runStage(host: HTMLElement): () => void {
 
   const draco = new DRACOLoader().setDecoderPath("/draco/");
   const loader = new GLTFLoader().setDRACOLoader(draco);
-  Promise.all([loader.loadAsync("/models/arandu.glb"), loader.loadAsync("/models/props.glb")])
+  // The books print their titles in the page's display font: wait for it too.
+  Promise.all([loader.loadAsync("/models/arandu.glb"), loader.loadAsync("/models/props.glb"), document.fonts.ready])
     .then(([catGltf, propsGltf]) => {
       draco.dispose();
       if (cancelled) return;

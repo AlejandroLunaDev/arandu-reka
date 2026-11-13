@@ -42,7 +42,8 @@ export type RoomTools = {
   shadow(): THREE.Object3D;
 };
 
-type Shelved = [BookName, BookLook] | [BookName, BookLook, "lean"];
+/** A book on a shelf: its shape, its look, the degree course it is about, and whether it leans. */
+type Shelved = [BookName, BookLook, string] | [BookName, BookLook, string, "lean"];
 
 const LOOK = {
   v8: { cover: "violet-800", band: "violet-400" },
@@ -67,9 +68,9 @@ function put(parent: THREE.Object3D, o: THREE.Object3D, x: number, y: number, z 
 /** Stands books side by side from x, left to right; returns the x where the row ends. */
 function standBooks(kit: Kit, parent: THREE.Object3D, x: number, y: number, books: Shelved[]) {
   let cx = x;
-  for (const [name, look, lean] of books) {
+  for (const [name, look, career, lean] of books) {
     const s = kit.size(name);
-    const b = kit.book(name, look);
+    const b = kit.book(name, look, career);
     if (lean) {
       // Tipped onto its left neighbour: it pivots on its bottom-left edge, its top resting on the
       // neighbour's.
@@ -85,14 +86,17 @@ function standBooks(kit: Kit, parent: THREE.Object3D, x: number, y: number, book
   return cx;
 }
 
-/** Lays books flat in a pile from x, spines to the front; returns the height of its top. */
-function pileBooks(kit: Kit, parent: THREE.Object3D, x: number, y: number, books: Array<[BookName, BookLook]>) {
+/**
+ * Lays books flat in a pile from x, spines to the front; returns the height of its top. Each book
+ * lies with its top to the left, so its title reads left to right.
+ */
+function pileBooks(kit: Kit, parent: THREE.Object3D, x: number, y: number, books: Array<[BookName, BookLook, string]>) {
   let cy = y;
-  books.forEach(([name, look], i) => {
+  books.forEach(([name, look, career], i) => {
     const s = kit.size(name);
-    const b = kit.book(name, look);
-    b.rotation.set(0, (i % 2 ? -1 : 1) * 0.04, -Math.PI / 2);
-    put(parent, b, x + (i % 2) * 0.012, cy + s.x / 2);
+    const b = kit.book(name, look, career);
+    b.rotation.set(0, (i % 2 ? -1 : 1) * 0.04, Math.PI / 2);
+    put(parent, b, x + s.y + (i % 2) * 0.012, cy + s.x / 2);
     cy += s.x;
   });
   return cy;
@@ -147,16 +151,16 @@ export function heroRoom(anchor: HTMLElement, { kit }: RoomTools): Room {
   // Lower shelf: books, the cat, and a ball of yarn that lost a strand toward him.
   put(content, kit.make("ShelfLarge"), 0.8, 0);
   const end = standBooks(kit, content, 0.1, 0, [
-    ["Book", LOOK.v6],
-    ["BookTall", LOOK.a6],
-    ["BookSlim", LOOK.c3],
-    ["BookThick", LOOK.v8],
-    ["BookShort", LOOK.a4, "lean"],
+    ["Book", LOOK.v6, "Psicologia"],
+    ["BookTall", LOOK.a6, "Medicina"],
+    ["BookSlim", LOOK.c3, "Letras"],
+    ["BookThick", LOOK.v8, "Engenharia"],
+    ["BookShort", LOOK.a4, "Filosofia", "lean"],
   ]);
   const seat = seatAt(content, end + 0.25, 0);
   standBooks(kit, content, end + 0.52, 0, [
-    ["BookPaperback", LOOK.a8],
-    ["Book", LOOK.v4],
+    ["BookPaperback", LOOK.a8, "Música"],
+    ["Book", LOOK.v4, "Economia"],
   ]);
   // Its strand runs back along the plank, to the shelf's end.
   const yarn = put(content, kit.make("YarnBall"), 1.29, 0, 0.05);
@@ -169,9 +173,9 @@ export function heroRoom(anchor: HTMLElement, { kit }: RoomTools): Room {
   // The plant stands POT_EDGE (0.12 m) behind the shelf's front edge (0.17 m from its middle).
   put(upper, kit.make("PlantPot"), -0.36, 0, 0.05);
   pileBooks(kit, upper, 0, 0, [
-    ["BookThick", LOOK.v6],
-    ["BookShort", LOOK.c3],
-    ["BookPaperback", LOOK.i7],
+    ["BookThick", LOOK.v6, "Biologia"],
+    ["BookShort", LOOK.c3, "Design"],
+    ["BookPaperback", LOOK.i7, "História"],
   ]);
   const mushroom = put(upper, kit.make("LampMushroom"), 0.36, 0);
 
@@ -190,8 +194,8 @@ export function heroRoom(anchor: HTMLElement, { kit }: RoomTools): Room {
     const lamp = pendant.visible ? pendant : mushroom;
     room.light = lamp.getObjectByName(pendant.visible ? "LampPendantLight" : "LampMushroomLight") ?? lamp;
     // The cord reaches past the top of the pinned scene, wherever the anchor sits in it.
-      const pin = anchor.closest<HTMLElement>("[data-pin]") ?? anchor;
-      const above = (anchor.getBoundingClientRect().bottom - pin.getBoundingClientRect().top) / room.k;
+    const pin = anchor.closest<HTMLElement>("[data-pin]") ?? anchor;
+    const above = (anchor.getBoundingClientRect().bottom - pin.getBoundingClientRect().top) / room.k;
     if (cord) cord.scale.y = Math.max(0.2, above - LAMP_Y + 0.4);
   };
   room.reveal = (rise, drop) => {
@@ -217,8 +221,8 @@ export function knowYouRoom(anchor: HTMLElement, { kit, shadow }: RoomTools): Ro
   put(right, mid, 0.66, 0.9);
   put(mid, kit.make("ShelfMedium"), 0, 0);
   const end = standBooks(kit, mid, -0.49, 0, [
-    ["BookThick", LOOK.a8],
-    ["BookSlim", LOOK.c3],
+    ["BookThick", LOOK.a8, "Arquitetura"],
+    ["BookSlim", LOOK.c3, "Nutrição"],
   ]);
   const seat = seatAt(mid, end + 0.27, 0);
   const lamp = put(mid, kit.make("LampClassic"), 0.34, 0);
@@ -227,7 +231,7 @@ export function knowYouRoom(anchor: HTMLElement, { kit, shadow }: RoomTools): Ro
   put(right, top, 0.66, 1.9);
   put(top, kit.make("ShelfSmall"), 0, 0);
   put(top, kit.make("LampDesk"), -0.18, 0);
-  put(top, kit.book("BookTall", LOOK.v4), 0.07, 0);
+  put(top, kit.book("BookTall", LOOK.v4, "Direito"), 0.07, 0);
   put(top, kit.make("Ball"), 0.19, 0, 0.04);
 
   const fit = () => {
